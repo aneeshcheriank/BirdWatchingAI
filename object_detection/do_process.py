@@ -8,5 +8,5 @@ def process_image(url):
         tensor = u.transform_to_tensor(image)
         detection = model.detect_objects(tensor)
 
-        return detection
+        return detection, image
     return None
