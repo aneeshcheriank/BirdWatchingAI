@@ -2,6 +2,19 @@ import os
 from torchvision.transforms import transforms
 import cv2
 
+EXTENSIONS = ('jpg', 'jpeg')
+
+
+def check_image(path):
+    """
+    :param path: file path
+    :return: Ture if the file is an image file
+    """
+    extension = path.split('.')[-1]
+    if extension.lower() in EXTENSIONS:
+        return True
+    return False
+
 
 def url_check(path):
     """
@@ -9,7 +22,10 @@ def url_check(path):
     :return: None if the path doesn't exist else the path
     """
     if os.path.exists(path):
-        return path
+        if check_image(path) is True:
+            return path
+        else:
+            print('the file is not a jpeg or jpg file')
     print('{url} does not exist')
     return None
 
