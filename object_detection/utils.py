@@ -1,6 +1,7 @@
 import os
 from torchvision.transforms import transforms
 import cv2
+import glob
 
 EXTENSIONS = ('jpg', 'jpeg')
 
@@ -55,3 +56,8 @@ def display_image(image):
     image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
     cv2.imshow('image', image)
     cv2.waitKey()
+
+
+def list_videos(folder, extension='avi'):
+    lst = glob.glob(f'{folder}/*.{extension}')
+    return lst
