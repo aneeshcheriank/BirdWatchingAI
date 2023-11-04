@@ -37,7 +37,7 @@ def transform_to_tensor(img):
 
 
 def process_bbox(results_per_input, ix=0):
-    boxes, classes, confidence = results_per_input[ix]
+    boxes, classes, confidence = results_per_input
     box = [val*300 for val in boxes]
     return box
 
@@ -58,6 +58,12 @@ def display_image(image):
     cv2.waitKey()
 
 
-def list_videos(folder, extension='avi'):
+def list_images(folder, extension='jpg'):
     lst = glob.glob(f'{folder}/*.{extension}')
     return lst
+
+
+def clear_folder(folder):
+    files = glob.glob(f'{folder}/*.*')
+    for file in files:
+        os.remove(file)
