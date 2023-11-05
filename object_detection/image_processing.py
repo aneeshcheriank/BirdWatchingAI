@@ -4,10 +4,10 @@ SIZE = (300, 300)
 
 
 def open_image(path):
-    image = cv2.imread(path)
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    image = cv2.resize(image, SIZE)
-    return image
+    image_actual = cv2.imread(path)
+    image_actual = cv2.cvtColor(image_actual, cv2.COLOR_BGR2RGB)
+    image = cv2.resize(image_actual, SIZE)
+    return image, image_actual
 
 
 def snip_objects(image, bboxs):

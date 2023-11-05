@@ -8,7 +8,7 @@ from object_detection import do_process as dp
 working_folder = '/home/aneesh/Downloads/working folder'
 input_folder = 'input'
 output_folder = 'output'
-file = 'test.mp4'
+file = 'test2.mp4'
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':

@@ -4,26 +4,28 @@ from object_detection import utils as u, model, video as v, image_processing as 
 
 def process_image(url):
     if u.url_check(url) is not None:
-        image = ip.open_image(url)
+        image, image_actual = ip.open_image(url)
         tensor = u.transform_to_tensor(image)
         detection = model.detect_objects(tensor)
 
-        return True, detection, image
+        return True, detection, image_actual
     return False, None, None
 
 
 def detect_object_from_video(video_path, image_folder):
+    u. create_folder(image_folder)
     v.convert_video_to_frames(video_path, image_folder)
 
     image_paths = u.list_images(image_folder, extension='jpg')
 
     objects_all_images = []
     for image_path in image_paths:
-        is_detect, boxes, image = process_image(image_path)
+        is_detect, results_per_input, image = process_image(image_path)
 
         if is_detect:
-            for box in boxes:
-                box = u.process_bbox(box)
+            h, w, _ = image.shape
+            box = u.process_bbox(results_per_input[0], (h, w))
+            if box is not None:
                 image_object = ip.snip_objects(image, box)
                 objects_all_images.append(image_object)
 
